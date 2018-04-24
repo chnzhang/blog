@@ -1,0 +1,11 @@
+C:\workspace\SkyBlog\SkyBlog\bin\Debug\netcoreapp2.0\SkyBlog.deps.json
+C:\workspace\SkyBlog\SkyBlog\bin\Debug\netcoreapp2.0\SkyBlog.runtimeconfig.json
+C:\workspace\SkyBlog\SkyBlog\bin\Debug\netcoreapp2.0\SkyBlog.runtimeconfig.dev.json
+C:\workspace\SkyBlog\SkyBlog\bin\Debug\netcoreapp2.0\SkyBlog.dll
+C:\workspace\SkyBlog\SkyBlog\bin\Debug\netcoreapp2.0\SkyBlog.pdb
+C:\workspace\SkyBlog\SkyBlog\obj\Debug\netcoreapp2.0\SkyBlog.csprojResolveAssemblyReference.cache
+C:\workspace\SkyBlog\SkyBlog\obj\Debug\netcoreapp2.0\SkyBlog.csproj.CoreCompileInputs.cache
+C:\workspace\SkyBlog\SkyBlog\obj\Debug\netcoreapp2.0\SkyBlog.AssemblyInfoInputs.cache
+C:\workspace\SkyBlog\SkyBlog\obj\Debug\netcoreapp2.0\SkyBlog.AssemblyInfo.cs
+C:\workspace\SkyBlog\SkyBlog\obj\Debug\netcoreapp2.0\SkyBlog.dll
+C:\workspace\SkyBlog\SkyBlog\obj\Debug\netcoreapp2.0\SkyBlog.pdb

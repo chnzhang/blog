@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
+    <PackageReference Include="sqlSugarCore" Version="4.6.4.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Blog\Data\" />
+    <Folder Include="Areas\Blog\Models\" />
+    <Folder Include="Areas\Member\Data\" />
+    <Folder Include="Areas\Member\Models\" />
+    <Folder Include="Areas\System\Controllers\" />
+    <Folder Include="Areas\System\Data\" />
+    <Folder Include="Areas\System\Models\" />
+    <Folder Include="Areas\System\Views\" />
+    <Folder Include="Models\Enum\" />
+    <Folder Include="Models\ViewModel\" />
+  </ItemGroup>
+
+</Project>

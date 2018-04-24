@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SkyBlog.DbContext.IRepository;
-using SkyBlog.DbContext.Repository;
+using SkyBlog.DbContexts.IRepository;
+using SkyBlog.DbContexts.Repository;
 
 namespace SkyBlog
 {

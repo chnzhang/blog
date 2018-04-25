@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SkyBlog.DbContexts;
 using SkyBlog.DbContexts.IRepository;
 using SkyBlog.DbContexts.Repository;
 
@@ -23,6 +21,10 @@ namespace SkyBlog
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //设置数据库连接字符串
+            DbContexts.EFDbFactory.ConnectionString = Configuration.GetSection("connection")["mysql"];
+            //设置数据库连接字符串
+            //services.AddDbContextPool<EFDbFactory>(options => options.UseMySQL(Configuration.GetSection("connection")["mysql"]));
             services.AddScoped<INewsRepository, NewsRepository>();
             services.AddMvc();
         }

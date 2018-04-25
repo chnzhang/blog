@@ -9,10 +9,14 @@ namespace SkyBlog.DbContexts
 {
     public class EFDbFactory:DbContext
     {
+        public static string ConnectionString { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL(Startup.Configuration.GetSection("connection")["mysql"]);
+            optionsBuilder.UseMySQL(ConnectionString);
         }
+
+
+
         /// <summary>
         /// 文章信息操作表
         /// </summary>

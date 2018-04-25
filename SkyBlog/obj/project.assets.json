@@ -13396,7 +13396,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\zhangguangzhi\\.nuget\\packages\\": {},
+    "C:\\Users\\John\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -13405,17 +13405,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\workspace\\GitHub\\blog\\SkyBlog\\SkyBlog.csproj",
+      "projectUniqueName": "D:\\github\\blog\\SkyBlog\\SkyBlog.csproj",
       "projectName": "SkyBlog",
-      "projectPath": "C:\\workspace\\GitHub\\blog\\SkyBlog\\SkyBlog.csproj",
-      "packagesPath": "C:\\Users\\zhangguangzhi\\.nuget\\packages\\",
-      "outputPath": "C:\\workspace\\GitHub\\blog\\SkyBlog\\obj\\",
+      "projectPath": "D:\\github\\blog\\SkyBlog\\SkyBlog.csproj",
+      "packagesPath": "C:\\Users\\John\\.nuget\\packages\\",
+      "outputPath": "D:\\github\\blog\\SkyBlog\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\zhangguangzhi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\John\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

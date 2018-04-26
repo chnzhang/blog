@@ -15,10 +15,12 @@ namespace SkyBlog.Areas.Blog.Controllers
             {
                 if (RouteData.Values["index"] != null)
                 {
+                    ViewBag.Index = (string)RouteData.Values["index"];
                     return (string)RouteData.Values["index"];
                 }
                 else
                 {
+                    ViewBag.Index = "zgz";
                     return "zgz";
                 }
             }

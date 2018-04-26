@@ -23,5 +23,7 @@ namespace SkyBlog.Controllers
             ViewBag.NewsList = newsRepository.GetNewList(null, 10);
             return View();
         }    
+
+        
     }
 }

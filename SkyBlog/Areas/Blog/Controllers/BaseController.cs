@@ -13,7 +13,14 @@ namespace SkyBlog.Areas.Blog.Controllers
         {
             get
             {
-                return (string)RouteData.Values["index"];
+                if (RouteData.Values["index"] != null)
+                {
+                    return (string)RouteData.Values["index"];
+                }
+                else
+                {
+                    return "zgz";
+                }
             }
         }
     }

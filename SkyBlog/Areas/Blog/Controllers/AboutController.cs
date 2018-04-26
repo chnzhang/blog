@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SkyBlog.Areas.Blog.Controllers
 {
-    public class AboutController : Controller
+    public class AboutController : BaseController
     {
         public IActionResult Index()
         {

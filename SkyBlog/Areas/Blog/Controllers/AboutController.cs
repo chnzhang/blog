@@ -10,6 +10,7 @@ namespace SkyBlog.Areas.Blog.Controllers
     {
         public IActionResult Index()
         {
+
             return View();
         }
     }

@@ -10,7 +10,7 @@ namespace SkyBlog.Areas.Blog.Controllers
     {
         public IActionResult Index()
         {
-            ViewBag.Index = IndexUrl;
+         
             return View();
         }
     }

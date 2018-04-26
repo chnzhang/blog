@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using SkyBlog.DbContexts;
 using SkyBlog.DbContexts.IRepository;
 using SkyBlog.DbContexts.Repository;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 
 namespace SkyBlog
 {
@@ -26,6 +28,8 @@ namespace SkyBlog
             //设置数据库连接字符串
             //services.AddDbContextPool<EFDbFactory>(options => options.UseMySQL(Configuration.GetSection("connection")["mysql"]));
             services.AddScoped<INewsRepository, NewsRepository>();
+            //解决中文被编码
+            services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.All));
             services.AddMvc();
         }
 

@@ -41,7 +41,8 @@ namespace SkyBlog
                 opt.Filters.Add<ExceptionFilterAttribute>();
                 opt.Filters.Add<PermissionsAttribute>();
                 opt.Filters.Add<GlobalActionFilterAttribute>();
-            })
+              
+            })        
             .AddJsonOptions(options =>
             {
                 //设置时间格式

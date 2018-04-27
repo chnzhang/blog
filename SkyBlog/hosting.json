@@ -1,0 +1,4 @@
+﻿{
+  "server.urls": "http://*:5000", //程序完整地址*代表 本机IP/locahost/127.0.0.1
+  "server.port": 5000 //程序启动端口
+}

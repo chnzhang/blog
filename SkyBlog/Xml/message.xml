@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<result>
+  <message>
+    <success>请求已成功执行</success>
+    <fail>请求执行失败</fail>
+    <unauthorized>请求被拒绝,权限不足</unauthorized>
+    <unsupported>请求数据格式不是服务器支持的格式</unsupported>
+    <data.unexist>请求返回的数据为空</data.unexist>
+    <data.exist>请求数据与数据库内其他数据冲突</data.exist>
+    <parameter.error>请求参数不符合接口定义</parameter.error>
+    <unsignature>令牌无效,请登录后重试</unsignature>
+    <system.error>程序异常,已上报服务商将尽快为您解决</system.error>
+    <system.define>系统资源未定义无法访问</system.define>
+    <system.timeout>请求响应过长，已熔断</system.timeout>    
+</message>
+</result>

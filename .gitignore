@@ -74,7 +74,5 @@ SkyBlog/obj/SkyBlog.csproj.nuget.g.targets
 SkyBlog/obj/Debug/netcoreapp2.0/SkyBlog.csproj.CoreCompileInputs.cache
 SkyBlog/obj/Debug/netcoreapp2.0/SkyBlog.csproj.CoreCompileInputs.cache
 SkyBlog/obj/Debug/netcoreapp2.0/SkyBlog.csproj.CoreCompileInputs.cache
-SkyBlog/appsettings.Development.json
-SkyBlog/appsettings.Development.json
 SkyBlog/bin/Debug/netcoreapp2.0/hosting.json
 SkyBlog/nlog.config

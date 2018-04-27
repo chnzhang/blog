@@ -136,4 +136,4 @@ obj.id='pagecurrent'
     <div class="pagelist"><a title="Total record">&nbsp;<b>43</b> </a>&nbsp;&nbsp;&nbsp;<b>1</b>&nbsp;<a href="/download/index_2.html">2</a>&nbsp;<a href="/download/index_2.html">下一页</a>&nbsp;<a href="/download/index_2.html">尾页</a></div>
 </div>
 
-@await Component.InvokeAsync("BlogRight")
+@await Component.InvokeAsync("BlogRight", new { index = ViewBag.Index })

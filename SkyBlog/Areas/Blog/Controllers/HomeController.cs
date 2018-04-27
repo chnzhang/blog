@@ -9,7 +9,7 @@ namespace SkyBlog.Areas.Blog.Controllers
     public class HomeController : BaseController
     {
         public IActionResult Index()
-        {           
+        {         
             return View();
         }
     

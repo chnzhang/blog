@@ -67,4 +67,10 @@
             <img src="/images/wx.png">
         </ul>
     </div>
+    <ul>
+        @foreach (SkyBlog.Models.DbModel.news item in ViewBag.NewsList)
+        {
+        <li>@item.title @item.create_date_time</li>
+        }
+    </ul>
 </div>

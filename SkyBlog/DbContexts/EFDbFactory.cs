@@ -21,5 +21,6 @@ namespace SkyBlog.DbContexts
         /// 文章信息操作表
         /// </summary>
         public DbSet<news> news { get; set; }
+        public DbSet<user> user { get; set; }
     }
 }

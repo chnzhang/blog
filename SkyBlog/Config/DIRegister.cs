@@ -38,6 +38,8 @@ namespace SkyBlog.Config
 
             services.AddScoped<INewsRepository, NewsRepository>();
 
+            services.AddScoped<IUserRepository, UserRepository>();
+
         }
     }
 }

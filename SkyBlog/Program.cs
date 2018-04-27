@@ -14,12 +14,24 @@ namespace SkyBlog
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            var config = new ConfigurationBuilder()
+             .SetBasePath(Directory.GetCurrentDirectory())
+             .AddEnvironmentVariables()
+             .AddCommandLine(args)
+             .AddJsonFile("hosting.json", optional: true)
+             .Build();
+
+            System.Threading.ThreadPool.SetMinThreads(500, 250);
+            BuildWebHost(config, args).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
+        public static IWebHost BuildWebHost(IConfigurationRoot config, string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
+                    .UseContentRoot(Directory.GetCurrentDirectory())
+                    .UseEnvironment(config["ASPNETCORE_ENVIRONMENT"])
+                    .UseConfiguration(config)
+                    .UseKestrel()
+                    .UseStartup<Startup>()
+                    .Build();
     }
 }

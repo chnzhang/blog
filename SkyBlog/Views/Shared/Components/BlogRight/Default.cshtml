@@ -1,6 +1,8 @@
 ﻿@{
     Layout = null;
+   
 }
+@using static SkyBlog.Common.MyDateTime
 <div class="rbox">
     <div class="paihang">
         <h2 class="hometitle">点击排行</h2>
@@ -70,10 +72,11 @@
     <ul>
         @foreach (SkyBlog.Models.DbModel.news item in ViewBag.NewsList)
         {
-        <li>1. @item.title @item.create_date_time.ToString("yyyy-MM-dd HH:mm:ss")</li>
+         
+        <li>1. @item.title @item.create_date_time.GetYMDHMS()</li>
         }
-    </ul>
-    <span>111111</span>
- <span>aaaaaaa @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")</span>  
-    <span>bbbbb @DateTime.Now.AddDays(1).ToString("yyyy-MM-dd HH:mm:ss")</span>
+    </ul>   
+ <span> @DateTime.Now.GetYMDHMS()</span>  <br />
+  <span> @DateTime.Now.AddDays(1).GetYMDHMSTT()</span><br />
+  <span>12 @DateTime.Now.AddDays(1).GetYMDhmsTT()</span>
 </div>

@@ -53,11 +53,11 @@ namespace SkyBlog.Models.DbModel
         /// 最后修改时间
         /// </summary>
         public DateTime update_date_time { get; set; }
-		    
-     
-				/// <summary>
+
+
+        /// <summary>
         /// 创建时间
-        /// </summary>
+        /// </summary>     
         public DateTime create_date_time { get; set; }
 		    }
 }

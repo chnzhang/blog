@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NLog.Web;
 using SkyBlog.Config;
 using SkyBlog.Filter;
+using System;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 
@@ -18,16 +21,15 @@ namespace SkyBlog
         }
 
         public static IConfiguration Configuration { get; set; }
+        public static IContainer AutofacContainer;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             //设置数据库连接字符串
             DbContexts.EFDbFactory.ConnectionString = Configuration.GetSection("connection")["mysql"];
-            //设置数据库连接字符串
-            //services.AddDbContextPool<EFDbFactory>(options => options.UseMySQL(Configuration.GetSection("connection")["mysql"]));
 
-            //注册注入配置  
+            //原core原生依赖注入配置  
             DIRegister sdr = new DIRegister();
             sdr.DIRegister_Context(services);
 
@@ -42,18 +44,29 @@ namespace SkyBlog
                 opt.Filters.Add<PermissionsAttribute>();
                 opt.Filters.Add<GlobalActionFilterAttribute>();
 
-            })        
+            })
             .AddJsonOptions(options =>
             {
                 //设置时间格式
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
             });
+
+            #region 使用autofac代替原生IOC
+            //ContainerBuilder builder = new ContainerBuilder();
+            ////将services中的服务填充到Autofac中.
+            //builder.Populate(services);
+            ////新模块组件注册
+            //builder.RegisterModule<DefaultModuleRegister>();
+            ////创建容器.
+            //AutofacContainer = builder.Build();
+            ////使用容器创建 AutofacServiceProvider 
+            //return new AutofacServiceProvider(AutofacContainer);
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime appLifetime)
         {
-
 
             if (env.IsDevelopment())
             {
@@ -78,13 +91,15 @@ namespace SkyBlog
 
                 routes.MapRoute(
                     name: "default",
-                    template: "{area=blog}/{controller=Home}/{action=Index}/{id?}"                 
+                    template: "{area=blog}/{controller=Home}/{action=Index}/{id?}"
                     );
             });
 
             //Nlog配置
             env.ConfigureNLog("nlog.config");//读取Nlog配置文件 
 
+            // 程序停止调用函数
+            appLifetime.ApplicationStopped.Register(() => { AutofacContainer.Dispose(); });
         }
     }
 }

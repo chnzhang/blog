@@ -2,7 +2,6 @@
     Layout = null;
    
 }
-@using static SkyBlog.Common.MyDateTime
 <div class="rbox">
     <div class="paihang">
         <h2 class="hometitle">点击排行</h2>
@@ -78,5 +77,5 @@
     </ul>   
  <span> @DateTime.Now.GetYMDHMS()</span>  <br />
   <span> @DateTime.Now.AddDays(1).GetYMDHMSTT()</span><br />
-  <span>12 @DateTime.Now.AddDays(1).GetYMDhmsTT()</span>
+  <span>12时制 @DateTime.Now.AddDays(1).GetYMDhmsTT()</span>
 </div>

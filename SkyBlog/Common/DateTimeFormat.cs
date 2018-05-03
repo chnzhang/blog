@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SkyBlog.Common
+﻿namespace System
 {
-    public static class MyDateTime
+    public static class DateTimeFormat
     {
         /// <summary>
         /// 得到年月日 时分秒 格式化日期 24小时制

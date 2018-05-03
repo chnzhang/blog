@@ -11,11 +11,11 @@ namespace SkyBlog.Controllers
 
     public class HomeController : Controller
     {
-        INewsRepository newsRepository;
-        public HomeController(INewsRepository newsRepository)
-        {
-            this.newsRepository = newsRepository;
-        }
+       private INewsRepository newsRepository { get;}
+        //public HomeController(INewsRepository newsRepository)
+        //{
+        //   // this.newsRepository = newsRepository;
+        //}
 
 
         public IActionResult Index()

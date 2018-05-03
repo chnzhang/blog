@@ -10,9 +10,10 @@ namespace SkyBlog.Areas.Blog.Controllers.ViewComponents
 {
     public class BlogRightViewComponent : ViewComponent
     {
-        private INewsRepository newsRepository;
-        private IUserRepository userRepository;
-
+        //public INewsRepository newsRepository { get; set; }
+       // public IUserRepository userRepository { get; set; }
+        public INewsRepository newsRepository;
+        public IUserRepository userRepository;
         public BlogRightViewComponent(INewsRepository newsRepository, IUserRepository userRepository)
         {
             this.newsRepository = newsRepository;

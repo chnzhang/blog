@@ -38,7 +38,7 @@
             @foreach (SkyBlog.Models.DbModel.news item in ViewBag.NewsList)
             {
              <li>
-                    <b><a href="/download/div/2015-04-10/746.html" target="_blank">@item.title</a></b>
+                    <b><a href="/blog/@ViewBag.Index/news/@item.id" target="_blank">@item.title</a></b>
                     <p><i><img src="/images/t02.jpg" /></i>展示的是首页html，博客页面布局格式简单，没有复杂的背景，色彩局部点缀，动态的幻灯片展示，切换卡，标...</p>
              </li>
             }

@@ -9,7 +9,7 @@ namespace SkyBlog.DbContexts.Repository
 {
     public class UserRepository : IUserRepository
     {
-        public async Task<user> GetUserByIndexAsync(string index)
+        public  user GetUserByIndexAsync(string index)
         {
             using (EFDbFactory db = new EFDbFactory())
             {

@@ -15,10 +15,14 @@ namespace SkyBlog.DbContexts.Repository
         /// </summary>
         /// <param name="id">文章编号</param>
         /// <returns></returns>
-        public news Get(int id)
+        public news Get(int id,int? userId)
         {
             using (EFDbFactory db = new EFDbFactory())
             {
+                if (userId != null)
+                {
+                    return db.news.Where(w => w.id == id && w.user_id == userId).First();
+                }
                 return db.news.Find(id);
             }
         }

@@ -8,7 +8,7 @@ namespace SkyBlog.DbContexts.IRepository
 {
     public interface INewsRepository
     {
-        news Get(int id);
+        news Get(int id,int? userId);
 
         /// <summary>
         /// 查询最新新闻列表

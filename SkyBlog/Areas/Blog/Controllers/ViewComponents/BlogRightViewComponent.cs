@@ -29,7 +29,7 @@ namespace SkyBlog.Areas.Blog.Controllers.ViewComponents
                 if (entity != null)
                 {
 
-                    ViewBag.NewsList = newsRepository.GetNewList(entity.Id,10);
+                    ViewBag.NewsList = newsRepository.GetNewList(entity.id,10);
                 }
 
                 return View();

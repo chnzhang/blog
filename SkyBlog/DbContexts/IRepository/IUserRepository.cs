@@ -13,6 +13,6 @@ namespace SkyBlog.DbContexts.IRepository
         /// </summary>
         /// <param name="index">主页地址</param>
         /// <returns></returns>
-        Task<user> GetUserByIndexAsync(string index);
+        user GetUserByIndexAsync(string index);
     }
 }

@@ -1,6 +1,6 @@
 ﻿@{
     Layout = null;
-   
+
 }
 <div class="rbox">
     <div class="paihang">
@@ -69,13 +69,11 @@
         </ul>
     </div>
     <ul>
+        @{ int pageNumber = 0;}
         @foreach (SkyBlog.Models.DbModel.news item in ViewBag.NewsList)
         {
-         
-        <li>1. @item.title @item.create_date_time.GetYMDHMS()</li>
+            pageNumber++;
+        <li>@pageNumber. @item.title <br />@item.create_date_time.GetYMDHMS()</li>
         }
     </ul>   
- <span> @DateTime.Now.GetYMDHMS()</span>  <br />
-  <span> @DateTime.Now.AddDays(1).GetYMDHMSTT()</span><br />
-  <span>12时制 @DateTime.Now.AddDays(1).GetYMDhmsTT()</span>
 </div>

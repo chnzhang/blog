@@ -70,7 +70,7 @@ namespace SkyBlog.DbContexts.Repository
             //    .AndIF(userId != null, (n, u) => u.name == "aaa")
             //    .ToExpression();
 
-          
+
             //var queys = DbFactory.Db.Queryable<news, user>((n, u) => new object[] {
             //  JoinType.Left,
             //}).Where((n, u) => n.user_id == 1).ToSql();
@@ -78,7 +78,7 @@ namespace SkyBlog.DbContexts.Repository
 
             using (EFDbFactory db = new EFDbFactory())
             {
-                var query = db.news;
+                IQueryable<news> query = db.news;
                 if (userId != null)
                 {
                     query.Where(w => w.user_id == userId);
@@ -96,7 +96,7 @@ namespace SkyBlog.DbContexts.Repository
         {
             using (EFDbFactory db = new EFDbFactory())
             {
-                var query = db.news;
+                IQueryable<news> query = db.news;
                 if (userId != null)
                 {
                     query.Where(w => w.user_id == userId);
@@ -114,13 +114,103 @@ namespace SkyBlog.DbContexts.Repository
         {
             using (EFDbFactory db = new EFDbFactory())
             {
-                var query = db.news;//.Include(person => person.user);
+                IQueryable<news> query = db.news;//.Include(person => person.user);
                 if (userId != null)
                 {
                     query.Where(w => w.user_id == userId);
                 }
                 return query.OrderByDescending(w => w.id).Take(number).ToList();
             }
+        }
+
+        /// <summary>
+        /// 更新文章点击率
+        /// </summary>
+        /// <param name="id">文章编号</param>
+        public void UpdateClickNumber(int id)
+        {
+            using (EFDbFactory db = new EFDbFactory())
+            {
+                news entity = db.news.Find(id);
+                entity.number += 1;
+                db.news.Update(entity);
+                db.SaveChangesAsync();
+            }
+        }
+
+        /// <summary>
+        /// 上一篇，下一篇文章
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IList<news> GetPerNextNews(int? userId, int id)
+        {
+            using (EFDbFactory db = new EFDbFactory())
+            {
+                IQueryable<news> perQuery = db.news.Where(w => w.id < id);
+                var nextQuery = db.news.Where(w => w.id > id);
+                if (userId != null)
+                {
+                    perQuery.Where(w => w.user_id == userId);
+                    nextQuery.Where(w => w.user_id == userId);
+                }
+                //上一篇
+                news perEntity = perQuery.OrderByDescending(w=>w.id).FirstOrDefault();
+
+                //下一篇
+                news nextEntity = nextQuery.FirstOrDefault();
+
+                IList<news> list = new List<news>();
+                list.Add(perEntity);
+                list.Add(nextEntity);
+
+                return list;
+            }
+        }
+
+        /// <summary>
+        /// 相关文章列表
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IList<news> GetRelevantArticlesList(int? userId, int id,int number)
+        {
+            using (EFDbFactory db = new EFDbFactory())
+            {
+                //查询该类别文章
+                news newsEntity = db.news.Find(id);
+                if (newsEntity != null)
+                {
+                    //查询该文章类别相关文章列表                   
+                    IQueryable<news> quuery = db.news.Where(w => w.category_id == newsEntity.category_id);
+                    if(userId!=null)
+                    {
+                        quuery.Where(w=>w.user_id==userId);
+                    }
+                    return quuery.OrderByDescending(w=>w.id).Take(number).ToList();
+                }
+                else
+                {
+                    return new List<news>();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// 查询文章标签
+        /// </summary>
+        /// <param name="id">文章编号</param>
+        /// <returns></returns>
+        public IList<tag> GetNewsTagList(int id)
+        {
+           using(EFDbFactory db=new EFDbFactory())
+           {
+               IQueryable<tag> query=from nt in db.news_tag
+                        join t in db.tag on nt.tag_id equals t.id
+                        where nt.news_id==id
+                        select t;
+               return query.ToList();     
+           }
         }
     }
 }

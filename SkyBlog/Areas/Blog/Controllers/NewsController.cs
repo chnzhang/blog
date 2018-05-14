@@ -36,6 +36,16 @@ namespace SkyBlog.Areas.Blog.Controllers
                 else
                     ViewBag.Auther ="未知";
             }
+
+            //查询文章标签
+            ViewBag.NewsTagList=newsRepository.GetNewsTagList(id);
+
+            ViewBag.PerNextNewsList=newsRepository.GetPerNextNews(userId,id);
+            ViewBag.RelevantArticlesNewsList=newsRepository.GetRelevantArticlesList(userId,id,10);
+
+            //更新点击率
+            newsRepository.UpdateClickNumber(id);
+
             return View(entity);
         }
     }

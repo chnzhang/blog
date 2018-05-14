@@ -35,6 +35,34 @@ namespace SkyBlog.DbContexts.IRepository
         /// </summary>
         /// <param name="userId">用户编号</param>
         /// <param name="number">获取条数</param>
-        IList<news> GetLasNewsList(int? userId,int number);
+        IList<news> GetLasNewsList(int? userId, int number);
+
+        /// <summary>
+        /// 更新文章点击率
+        /// </summary>
+        /// <param name="id">文章编号</param>
+        void UpdateClickNumber(int id);
+
+        /// <summary>
+        /// 上一篇，下一篇文章
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        IList<news> GetPerNextNews(int? userId, int id);
+
+        /// <summary>
+        /// 相关文章列表
+        /// </summary>
+        /// <param name="userId">用户编号</param>
+        /// <param name="id">文章编号</param>
+        /// <param name="number">获取条数</param>
+        IList<news> GetRelevantArticlesList(int? userId, int id, int number);
+
+        /// <summary>
+        /// 查询文章标签
+        /// </summary>
+        /// <param name="id">文章编号</param>
+        /// <returns></returns>
+        IList<tag> GetNewsTagList(int id);
     }
 }

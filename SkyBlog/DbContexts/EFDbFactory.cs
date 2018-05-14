@@ -22,5 +22,7 @@ namespace SkyBlog.DbContexts
         /// </summary>
         public DbSet<news> news { get; set; }
         public DbSet<user> user { get; set; }
+        public DbSet<news_tag> news_tag{get;set;}
+        public DbSet<tag> tag{get;set;}
     }
 }

@@ -24,7 +24,7 @@
         manager.StartNewFile(entity.EntityName + ".cs");
 #>
 //-----------------------------------------------------------------------
-// <copyright file=" <#= entity.EntityName #>.cs" company="四川易迅通健康医疗有限公司 Enterprises">
+// <copyright file=" <#= entity.EntityName #>.cs" company="四川易迅通健康医疗技术发展有限公司 Enterprises">
 // * Copyright (C) <#= copyright #>
 // * version : <#= version #>
 // * author  : <#= author #>

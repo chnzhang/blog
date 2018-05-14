@@ -13,7 +13,7 @@ namespace SkyBlog.Areas.Blog.Controllers
     [Area("blog")]
     public class BaseController : Controller
     {
-        private IUserRepository userRepository=new UserRepository();     
+        protected IUserRepository userRepository=new UserRepository();     
 
         public string IndexUrl { get; set; }
         public int userId { get; set; }

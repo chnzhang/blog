@@ -10,8 +10,6 @@ namespace SkyBlog.Areas.Blog.Controllers.ViewComponents
 {
     public class BlogRightViewComponent : ViewComponent
     {
-        //public INewsRepository newsRepository { get; set; }
-       // public IUserRepository userRepository { get; set; }
         public INewsRepository newsRepository;
         public IUserRepository userRepository;
         public BlogRightViewComponent(INewsRepository newsRepository, IUserRepository userRepository)
@@ -28,12 +26,15 @@ namespace SkyBlog.Areas.Blog.Controllers.ViewComponents
                 var entity = userRepository.GetUserByIndexAsync(index);
                 if (entity != null)
                 {
+                    //查询点击排行文章列表
+                    ViewBag.TopNewsList = newsRepository.GetTopNewsList(entity.id, 10);
 
-                    ViewBag.NewsList = newsRepository.GetNewList(entity.id,10);
+                    //查询栏目推荐文章列表 
+                    ViewBag.RecommendNewsList = newsRepository.GetRecommendNewsList(entity.id, 10);
                 }
 
                 return View();
-            }); 
+            });
         }
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NetDataAnnotations;
 using NLog.Web;
 using SkyBlog.Config;
 using SkyBlog.Filter;
@@ -35,7 +36,7 @@ namespace SkyBlog
 
             //解决中文被编码
             services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.All));
-
+       
             //配置时间格式
             services.AddMvc(opt =>
             {
@@ -92,7 +93,7 @@ namespace SkyBlog
                 routes.MapRoute(
                     name: "default",
                     template: "{area=blog}/{controller=Home}/{action=Index}/{id?}"
-                    );
+                    );             
             });
 
             //Nlog配置

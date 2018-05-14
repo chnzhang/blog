@@ -8,13 +8,33 @@ namespace SkyBlog.DbContexts.IRepository
 {
     public interface INewsRepository
     {
-        news Get(int id,int? userId);
+        /// <summary>
+        /// 获取单条文章编号
+        /// </summary>
+        /// <param name="id">文章编号</param>
+        /// <param name="userId">用户编号</param>
+        news Get(int id, int? userId);
 
         /// <summary>
-        /// 查询最新新闻列表
+        /// 查询点击排行文章列表
         /// </summary>
-        /// <param name="userId"></param>
+        /// <param name="userId">用户编号</param>
+        /// <param name="number">获取条数</param>
+        IList<news> GetTopNewsList(int? userId, int number);
+
+        /// <summary>
+        /// 查询推荐栏目文章列表
+        /// </summary>
+        /// <param name="userId">用户编号</param>
+        /// <param name="number">获取条数</param>
         /// <returns></returns>
-        IList<news> GetNewList(int? userId,int number);
+        IList<news> GetRecommendNewsList(int? userId, int number);
+
+        /// <summary>
+        /// 查询最新发布的文章列表
+        /// </summary>
+        /// <param name="userId">用户编号</param>
+        /// <param name="number">获取条数</param>
+        IList<news> GetLasNewsList(int? userId,int number);
     }
 }

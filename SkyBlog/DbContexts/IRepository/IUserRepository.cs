@@ -14,5 +14,12 @@ namespace SkyBlog.DbContexts.IRepository
         /// <param name="index">主页地址</param>
         /// <returns></returns>
         user GetUserByIndexAsync(string index);
+
+        /// <summary>
+        /// 根据用户编号获取用户信息
+        /// </summary>
+        /// <param name="id">用户编号</param>
+        /// <returns></returns>
+        user Get(int id);
     }
 }

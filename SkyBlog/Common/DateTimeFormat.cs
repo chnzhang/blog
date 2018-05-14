@@ -11,7 +11,17 @@
         {
             return dt.ToString("yyyy-MM-dd HH:mm:ss");
         }
-     
+
+        // <summary>
+        /// 得到年月日 格式化日期
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static string GetYMD(this DateTime dt)
+        {
+            return dt.ToString("yyyy-MM-dd");
+        }
+
         /// <summary>
         /// 得到年月日 时分秒 格式化日期 24小时制 上下午
         /// </summary>
@@ -43,7 +53,7 @@
             return dt.ToString("yyyy-MM-dd hh:mm:ss tt");
         }
 
-   
-   
+
+
     }
 }

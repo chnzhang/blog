@@ -20,7 +20,7 @@ namespace SkyBlog.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.NewsList = newsRepository.GetNewList(null, 10);
+            ViewBag.NewsList = newsRepository.GetRecommendNewsList(null, 10);
             return View();
         }    
 

@@ -8,48 +8,51 @@
 // </copyright>
 //-----------------------------------------------------------------------
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SkyBlog.Models.DbModel
 {
     /// <summary>
     /// news Entity Model
     /// </summary>    
-    public class news: BaseEntity
+    public class news : BaseEntity
     {
-    
-	    
-     
-				/// <summary>
+
+
+
+        /// <summary>
         /// 文章类别
         /// </summary>
         public int category_id { get; set; }
-		    
-     
-				/// <summary>
+
+
+        /// <summary>
         /// 标题
         /// </summary>
         public string title { get; set; }
-		    
-     
-				/// <summary>
+
+
+        /// <summary>
         /// 内容
         /// </summary>
         public string content { get; set; }
-		    
-     
-				/// <summary>
+
+
+        /// <summary>
         /// 阅读量
         /// </summary>
         public int number { get; set; }
-		    
-     
-				/// <summary>
+
+
+        /// <summary>
         /// 发布人
         /// </summary>
         public int user_id { get; set; }
-		    
-     
-				/// <summary>
+
+        //[ForeignKey("user_id")]   //外键
+      //  public virtual user user {get;set;}
+
+        /// <summary>
         /// 最后修改时间
         /// </summary>
         public DateTime update_date_time { get; set; }
@@ -59,5 +62,8 @@ namespace SkyBlog.Models.DbModel
         /// 创建时间
         /// </summary>     
         public DateTime create_date_time { get; set; }
-		    }
+
+        public string image{get;set;}
+        public string description{get;set;}
+    }
 }

@@ -1,0 +1,16 @@
+2018-05-10 16:35:43.3181 Error Error sending mail. Exception: System.FormatException: The specified string is not in the form required for an e-mail address.
+   at System.Net.Mail.MailAddressParser.ReadCfwsAndThrowIfIncomplete(String data, Int32 index)
+   at System.Net.Mail.MailAddressParser.ParseDomain(String data, Int32& index)
+   at System.Net.Mail.MailAddressParser.ParseAddress(String data, Boolean expectMultipleAddresses, Int32& index)
+   at System.Net.Mail.MailAddressParser.ParseAddress(String data)
+   at System.Net.Mail.MailAddress..ctor(String address, String displayName, Encoding displayNameEncoding)
+   at NLog.Targets.MailTarget.CreateMailMessage(LogEventInfo lastEvent, String body)
+   at NLog.Targets.MailTarget.ProcessSingleMailMessage(IList`1 events)
+2018-05-10 16:38:53.2729 Error Error sending mail. Exception: System.FormatException: The specified string is not in the form required for an e-mail address.
+   at System.Net.Mail.MailAddressParser.ReadCfwsAndThrowIfIncomplete(String data, Int32 index)
+   at System.Net.Mail.MailAddressParser.ParseDomain(String data, Int32& index)
+   at System.Net.Mail.MailAddressParser.ParseAddress(String data, Boolean expectMultipleAddresses, Int32& index)
+   at System.Net.Mail.MailAddressParser.ParseAddress(String data)
+   at System.Net.Mail.MailAddress..ctor(String address, String displayName, Encoding displayNameEncoding)
+   at NLog.Targets.MailTarget.CreateMailMessage(LogEventInfo lastEvent, String body)
+   at NLog.Targets.MailTarget.ProcessSingleMailMessage(IList`1 events)

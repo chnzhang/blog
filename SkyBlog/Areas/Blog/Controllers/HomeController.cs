@@ -19,7 +19,7 @@ namespace SkyBlog.Areas.Blog.Controllers
 
         public IActionResult Index()
         {         
-            return View(newsRepository.GetLasNewsList(userId,10));
+            return View(newsRepository.GetLasNewsList(userId,20));
         }
     
     }

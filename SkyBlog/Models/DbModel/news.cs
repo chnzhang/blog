@@ -42,7 +42,7 @@ namespace SkyBlog.Models.DbModel
         /// 阅读量
         /// </summary>
         public int number { get; set; }
-
+        public int good_number{get;set;}
 
         /// <summary>
         /// 发布人

@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "张光智的小屋";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+@model SkyBlog.Models.DbModel.news
+<div class="infos">
+    <div class="newsview">
+        <h2 class="intitle">您现在的位置是：<a href="/">网站首页</a>&nbsp;&gt;&nbsp;<a href="/">学无止境</a></h2>
+        <h3 class="news_title">@Model.title</h3>
+        <div class="news_author"><span class="au01">@ViewBag.Auther</span><span class="au02">@Model.create_date_time.GetYMDHMS()</span><span class="au03">共<b>@Model.number</b>人围观</span></div>
+        <div class="tags">
+            @foreach (var item in ViewBag.NewsTagList)
+            {
+                <a href="/">@item.name</a>
+            }
+            </div>
+        <div class="news_about"><strong>简介</strong>@Model.description</div>
+        <div class="news_infos">
+            @Html.Raw(Model.content)
+        </div>
+    </div>
+</div>
+<div class="nextinfo">
+    @{int i=0;}
+    @foreach (var item in ViewBag.PerNextNewsList)
+    {
+        if(item!=null)
+        {
+            if(i==0)
+            {
+                <p>上一篇：<a href="/blog/@ViewBag.Index/news/@item.id">@item.title</a></p>
+            }
+            else
+            {
+                <p>下一篇：<a href="/blog/@ViewBag.Index/news/@item.id">@item.title</a></p>
+            }
+        }
+        i++;
+    }   
+</div>
+<div class="otherlink">
+    <h2>相关文章</h2>
+    <ul>
+        @foreach (var item in ViewBag.RelevantArticlesNewsList)
+        {
+            <li><a href="/blog/@ViewBag.Index/news/@item.id" title="@item.title">@item.title</a></li>
+        }  
+    </ul>
+</div>
+<div class="news_pl">

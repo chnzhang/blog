@@ -5,7 +5,7 @@
     // 是否是WCF服务模型
     bool serviceModel = false;
     
-    // 数据库连接
+    // 数据库连接 
     var connectionString = @"server=47.98.172.201;port=3306;user id=root;password=zgz1990;Charset=utf8;";
 
     // 需要解析的数据库

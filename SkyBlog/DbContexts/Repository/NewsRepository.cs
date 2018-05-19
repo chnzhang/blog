@@ -7,6 +7,8 @@ using SkyBlog.Models.DbModel;
 using SqlSugar;
 using Microsoft.EntityFrameworkCore;
 using DMF.Tools.DataTypeExtend;
+using SkyBlog.Common;
+using SkyBlog.Models.DTO;
 
 namespace SkyBlog.DbContexts.Repository
 {
@@ -110,16 +112,36 @@ namespace SkyBlog.DbContexts.Repository
         /// </summary>
         /// <param name="userId">用户编号</param>
         /// <param name="number">获取条数</param>
-        public IList<news> GetLasNewsList(int? userId, int number)
+        public IList<NewsListDTO> GetLasNewsList(int? userId, int number)
         {
             using (EFDbFactory db = new EFDbFactory())
             {
-                IQueryable<news> query = db.news;//.Include(person => person.user);
-                if (userId != null)
+                var query = from n in db.news
+                            join u in db.user on n.user_id equals u.id
+                            join t in db.tag on n.category_id equals t.id into temp
+                            from tt in temp.DefaultIfEmpty()
+                            select new NewsListDTO
+                            {
+                                id = n.id,
+                                title = n.title,
+                                description = n.description,
+                                image = n.image,
+                                userName = u.name,
+                                categoryName = tt.name,
+                                number = n.number,
+                                goodNumber = n.good_number,
+                                createDateTime = n.create_date_time
+                            };
+                List<NewsListDTO> list = query.Take(number).ToList();
+                foreach (var item in list)
                 {
-                    query.Where(w => w.user_id == userId);
+                    var itemQuery = from nt in db.news_tag
+                                    join t in db.tag on nt.tag_id equals t.id
+                                    where nt.news_id == item.id
+                                    select t;
+                    item.tag = itemQuery.ToList();
                 }
-                return query.OrderByDescending(w => w.id).Take(number).ToList();
+                return list;
             }
         }
 
@@ -155,7 +177,7 @@ namespace SkyBlog.DbContexts.Repository
                     nextQuery.Where(w => w.user_id == userId);
                 }
                 //上一篇
-                news perEntity = perQuery.OrderByDescending(w=>w.id).FirstOrDefault();
+                news perEntity = perQuery.OrderByDescending(w => w.id).FirstOrDefault();
 
                 //下一篇
                 news nextEntity = nextQuery.FirstOrDefault();
@@ -173,7 +195,7 @@ namespace SkyBlog.DbContexts.Repository
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IList<news> GetRelevantArticlesList(int? userId, int id,int number)
+        public IList<news> GetRelevantArticlesList(int? userId, int id, int number)
         {
             using (EFDbFactory db = new EFDbFactory())
             {
@@ -183,11 +205,11 @@ namespace SkyBlog.DbContexts.Repository
                 {
                     //查询该文章类别相关文章列表                   
                     IQueryable<news> quuery = db.news.Where(w => w.category_id == newsEntity.category_id);
-                    if(userId!=null)
+                    if (userId != null)
                     {
-                        quuery.Where(w=>w.user_id==userId);
+                        quuery.Where(w => w.user_id == userId);
                     }
-                    return quuery.OrderByDescending(w=>w.id).Take(number).ToList();
+                    return quuery.OrderByDescending(w => w.id).Take(number).ToList();
                 }
                 else
                 {
@@ -195,7 +217,7 @@ namespace SkyBlog.DbContexts.Repository
                 }
             }
         }
-        
+
         /// <summary>
         /// 查询文章标签
         /// </summary>
@@ -203,14 +225,19 @@ namespace SkyBlog.DbContexts.Repository
         /// <returns></returns>
         public IList<tag> GetNewsTagList(int id)
         {
-           using(EFDbFactory db=new EFDbFactory())
-           {
-               IQueryable<tag> query=from nt in db.news_tag
-                        join t in db.tag on nt.tag_id equals t.id
-                        where nt.news_id==id
-                        select t;
-               return query.ToList();     
-           }
+            using (EFDbFactory db = new EFDbFactory())
+            {
+                IQueryable<tag> query = from nt in db.news_tag
+                                        join t in db.tag on nt.tag_id equals t.id
+                                        where nt.news_id == id
+                                        select t;
+                return query.ToList();
+            }
+        }
+
+        public Pager GetNewsListPage(int pageSize, int page)
+        {
+            throw new NotImplementedException();
         }
     }
 }

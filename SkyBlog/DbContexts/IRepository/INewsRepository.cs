@@ -1,4 +1,6 @@
-﻿using SkyBlog.Models.DbModel;
+﻿using SkyBlog.Common;
+using SkyBlog.Models.DbModel;
+using SkyBlog.Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +37,7 @@ namespace SkyBlog.DbContexts.IRepository
         /// </summary>
         /// <param name="userId">用户编号</param>
         /// <param name="number">获取条数</param>
-        IList<news> GetLasNewsList(int? userId, int number);
+        IList<NewsListDTO> GetLasNewsList(int? userId, int number);
 
         /// <summary>
         /// 更新文章点击率
@@ -64,5 +66,13 @@ namespace SkyBlog.DbContexts.IRepository
         /// <param name="id">文章编号</param>
         /// <returns></returns>
         IList<tag> GetNewsTagList(int id);
+
+        /// <summary>
+        /// 根据条件查询文章列表-分页查询
+        /// </summary>    
+        /// <param name="pageSize">每页条数</param>
+        /// <param name="page">当前页码</param>   
+        /// <returns>分页对象</returns>
+        Pager GetNewsListPage(int pageSize, int page);
     }
 }

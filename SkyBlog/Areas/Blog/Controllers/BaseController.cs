@@ -14,9 +14,10 @@ namespace SkyBlog.Areas.Blog.Controllers
     public class BaseController : Controller
     {
         protected IUserRepository userRepository=new UserRepository();     
-
+        protected IUserBlogTemplateRecordRepository userBlogTemplateRecordRepository=new UserBlogTemplateRecordRepository();
         public string IndexUrl { get; set; }
         public int userId { get; set; }
+        public string userBlogTemplate{get;set;}
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             if (RouteData.Values["index"] != null)
@@ -34,6 +35,12 @@ namespace SkyBlog.Areas.Blog.Controllers
             if (entity != null)
             {
                 userId = entity.id;
+                //查询用户博客模板
+                blog_template btEntity= userBlogTemplateRecordRepository.GetUserBlogTemplate(userId);
+                if(btEntity!=null)
+                {
+                    userBlogTemplate=btEntity.view_path;
+                }
             }
         }
 

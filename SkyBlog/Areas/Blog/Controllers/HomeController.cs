@@ -18,8 +18,8 @@ namespace SkyBlog.Areas.Blog.Controllers
         }
 
         public IActionResult Index()
-        {         
-            return View(newsRepository.GetLasNewsList(userId,20));
+        {             
+            return View(userBlogTemplate+"Home/Index.cshtml",newsRepository.GetLasNewsList(userId,20));
         }
     
     }

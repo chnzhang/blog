@@ -1,0 +1,20 @@
+@{
+    ViewBag.Title ="时间轴-张光智的博客";
+    Layout = "/Areas/Blog/Views/Shared/_MoreLayout.cshtml";
+}
+@model SkyBlog.Common.Pager
+<div class="pagebg timer"> </div>
+<div class="container">
+  <h1 class="t_nav"><span>时光飞逝，机会就在我们眼前，何时找到了灵感，就要把握机遇，我们需要智慧和勇气去把握机会。</span><a href="/" class="n1">网站首页</a><a href="/" class="n2">时间轴</a></h1>
+  <div class="timebox">
+  <ul id="list">
+      @foreach(var item in Model.rows)
+      {
+        <li><span>@Convert.ToDateTime(item.createDateTime).ToString("yyyy-MM-dd")</span><a href="/blog/@ViewBag.Index/news/@item.id" title="@item.title" target="_blank">@item.title</a></li>
+      }
+  <div class="pagelist"><a class="allpage"><b>29</b></a>&nbsp;&nbsp;<a href="#" class="curPage">1</a>&nbsp;&nbsp;<a href="#" onclick="page(2)">2</a>&nbsp;&nbsp;<a href="#" onclick="page(2)">下一页</a></div>
+  </ul>
+
+
+  </div>
+</div>

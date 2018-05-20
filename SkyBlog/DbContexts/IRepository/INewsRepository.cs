@@ -79,6 +79,6 @@ namespace SkyBlog.DbContexts.IRepository
         /// <param name="pageSize">每页条数</param>
         /// <param name="page">当前页码</param>   
         /// <returns>分页对象</returns>
-        Pager GetNewsListPage(int pageSize, int page);
+        Pager GetNewsListPage(int pageSize, int page,int userId);
     }
 }

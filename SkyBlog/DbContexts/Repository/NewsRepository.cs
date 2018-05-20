@@ -200,9 +200,44 @@ namespace SkyBlog.DbContexts.Repository
             }
         }
 
-        public Pager GetNewsListPage(int pageSize, int page)
+        public Pager GetNewsListPage(int pageSize, int page,int userId)
         {
-            throw new NotImplementedException();
+            Pager pager=new Pager();
+            pager.pageSize=pageSize;
+            pager.page=page;
+
+            using (EFDbFactory db = new EFDbFactory())
+            {
+               var count=db.news.Where(w=>w.user_id==userId).OrderByDescending(w=>w.id).Count();
+               pager.total=count;
+                var query = from n in db.news
+                            join u in db.user on n.user_id equals u.id
+                            join c in db.category on n.category_id equals c.id into temp
+                            from tt in temp.DefaultIfEmpty()
+                            select new NewsListDTO
+                            {
+                                id = n.id,
+                                title = n.title,
+                                description = n.description,
+                                image = n.image,
+                                userName = u.name,
+                                categoryName = tt.name,
+                                number = n.number,
+                                goodNumber = n.good_number,
+                                createDateTime = n.create_date_time
+                            };
+                List<NewsListDTO> list = query.OrderByDescending(w=>w.id).Skip((page-1)*pageSize).Take(pageSize).ToList();
+                foreach (var item in list)
+                {
+                    var itemQuery = from nt in db.news_tag
+                                    join t in db.tag on nt.tag_id equals t.id
+                                    where nt.news_id == item.id
+                                    select t;
+                    item.tag = itemQuery.ToList();
+                }
+                pager.rows=list;
+                return pager;
+            }
         }
 
         public IList<news> GetSpecialRecommendNewsList(int userId, int number)

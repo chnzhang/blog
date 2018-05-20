@@ -17,6 +17,8 @@ namespace SkyBlog.DbContexts.IRepository
         /// <param name="userId">用户编号</param>
         news Get(int id, int? userId);
 
+        NewsDetailDTO GetNewsDetail(int userId,int id);
+
         /// <summary>
         /// 查询点击排行文章列表
         /// </summary>
@@ -38,6 +40,10 @@ namespace SkyBlog.DbContexts.IRepository
         /// <param name="userId">用户编号</param>
         /// <param name="number">获取条数</param>
         IList<NewsListDTO> GetLasNewsList(int? userId, int number);
+
+
+        IList<news> GetSpecialRecommendNewsList(int userId,int number);
+
 
         /// <summary>
         /// 更新文章点击率

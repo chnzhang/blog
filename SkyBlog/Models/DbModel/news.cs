@@ -49,8 +49,10 @@ namespace SkyBlog.Models.DbModel
         /// </summary>
         public int user_id { get; set; }
 
-        //[ForeignKey("user_id")]   //外键
-      //  public virtual user user {get;set;}
+        
+        public byte recommended{get;set;}
+
+        public byte special_recommended{get;set;}
 
         /// <summary>
         /// 最后修改时间
@@ -65,5 +67,7 @@ namespace SkyBlog.Models.DbModel
 
         public string image{get;set;}
         public string description{get;set;}
+
+        public int sort{get;set;}
     }
 }

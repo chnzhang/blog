@@ -41,43 +41,6 @@ namespace SkyBlog.DbContexts.Repository
         public IList<news> GetRecommendNewsList(int? userId, int number)
         {
 
-            //List<SugarParameter> par = new List<SugarParameter>();
-            //IDictionary<string, string> onWhere = new Dictionary<string, string>();
-            //onWhere.Add("user", " AND u.name=@name");
-            //par.Add(new SugarParameter("name", "123"));
-
-
-            //var quey = DbFactory.Db.Queryable<news>("w")
-            //    .AddJoinInfo("user", "u", "u.id=w.id" + (userId != null ? onWhere["user"] : string.Empty), JoinType.Left)
-            //    .AddParameters(par)
-            //    .WhereIF(userId != null, w => w.user_id == userId)
-            //    .OrderBy(w => w.create_date_time, OrderByType.Desc)
-            //    .Take(number);
-            //var sql = quey.ToSql();
-            //var list = quey.ToList();
-
-            //System.Linq.Expressions.Expression<Func<news, user, bool>> exps = null;
-            //if (userId == null)
-            //{
-            //    exps = (n, u) => n.user_id == u.id;
-            //}
-            //else
-            //{
-            //    exps = (n, u) => n.user_id == u.id && u.name == "zgz";
-            //}
-
-
-            //var exp = Expressionable.Create<news, user>()
-            //    .And((n, u) => n.user_id == u.id)
-            //    .AndIF(userId != null, (n, u) => u.name == "aaa")
-            //    .ToExpression();
-
-
-            //var queys = DbFactory.Db.Queryable<news, user>((n, u) => new object[] {
-            //  JoinType.Left,
-            //}).Where((n, u) => n.user_id == 1).ToSql();
-
-
             using (EFDbFactory db = new EFDbFactory())
             {
                 IQueryable<news> query = db.news;
@@ -85,7 +48,9 @@ namespace SkyBlog.DbContexts.Repository
                 {
                     query.Where(w => w.user_id == userId);
                 }
-                return query.OrderByDescending(w => w.create_date_time).Take(number).ToList();
+                return query.Where(w => w.recommended == 1)
+                .OrderByDescending(w => w.sort)
+                .ThenByDescending(w => w.id).Take(number).ToList();
             }
         }
 
@@ -118,7 +83,7 @@ namespace SkyBlog.DbContexts.Repository
             {
                 var query = from n in db.news
                             join u in db.user on n.user_id equals u.id
-                            join t in db.tag on n.category_id equals t.id into temp
+                            join c in db.category on n.category_id equals c.id into temp
                             from tt in temp.DefaultIfEmpty()
                             select new NewsListDTO
                             {
@@ -132,7 +97,7 @@ namespace SkyBlog.DbContexts.Repository
                                 goodNumber = n.good_number,
                                 createDateTime = n.create_date_time
                             };
-                List<NewsListDTO> list = query.Take(number).ToList();
+                List<NewsListDTO> list = query.OrderByDescending(w=>w.id).Take(number).ToList();
                 foreach (var item in list)
                 {
                     var itemQuery = from nt in db.news_tag
@@ -238,6 +203,50 @@ namespace SkyBlog.DbContexts.Repository
         public Pager GetNewsListPage(int pageSize, int page)
         {
             throw new NotImplementedException();
+        }
+
+        public IList<news> GetSpecialRecommendNewsList(int userId, int number)
+        {
+            using (EFDbFactory db = new EFDbFactory())
+            {
+                return db.news.Where(w => w.user_id == userId && w.special_recommended == 1)
+                       .OrderByDescending(w => w.sort)
+                       .ThenByDescending(w => w.id).Take(number).ToList();
+            }
+        }
+
+        public NewsDetailDTO GetNewsDetail(int userId, int id)
+        {
+            using (EFDbFactory db = new EFDbFactory())
+            {
+                var query = from n in db.news
+                            join u in db.user on n.user_id equals u.id
+                            join c in db.category on n.category_id equals c.id into temp
+                            from tt in temp.DefaultIfEmpty()
+                            where n.id==id && n.user_id==userId
+                            select new NewsDetailDTO
+                            {
+                                id = n.id,
+                                title = n.title,
+                                description = n.description,
+                                userName = u.name,
+                                categoryName = tt.name,
+                                number = n.number,
+                                goodNumber = n.good_number,
+                                createDateTime = n.create_date_time,
+                                Content=n.content
+                            };
+                NewsDetailDTO newsDTO = query.FirstOrDefault();
+                if (newsDTO != null)
+                {
+                    var newsQuery = from nt in db.news_tag
+                                    join t in db.tag on nt.tag_id equals t.id
+                                    where nt.news_id == newsDTO.id
+                                    select t;
+                    newsDTO.tag = newsQuery.ToList();
+                }
+                return newsDTO;
+            }
         }
     }
 }

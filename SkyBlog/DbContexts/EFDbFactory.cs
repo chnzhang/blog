@@ -25,5 +25,6 @@ namespace SkyBlog.DbContexts
         public DbSet<tag> tag{get;set;}
         public DbSet<blog_template> blog_template{get;set;}
         public DbSet<user_blog_template_record> user_blog_template_record{get;set;}
+        public DbSet<category> category{get;set;}
     }
 }

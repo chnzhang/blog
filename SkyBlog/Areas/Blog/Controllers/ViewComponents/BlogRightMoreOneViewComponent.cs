@@ -26,11 +26,23 @@ namespace SkyBlog.Areas.Blog.Controllers.ViewComponents
                 var entity = userRepository.GetUserByIndexAsync(index);
                 if (entity != null)
                 {
+                    //查询特别推荐文章列表
+                    ViewBag.SpecialRecommendNewsList = newsRepository.GetSpecialRecommendNewsList(entity.id, 3);
+
+
                     //查询点击排行文章列表
-                    ViewBag.TopNewsList = newsRepository.GetTopNewsList(entity.id, 10);
+                    IList<news> topNewsList = newsRepository.GetTopNewsList(entity.id, 5);
+                    news topFirst = topNewsList.FirstOrDefault();
+                    ViewBag.TopNewFirst = topFirst;
+                    if (topFirst != null)
+                        ViewBag.TopNewsList = topNewsList.Where(w => w.id != topFirst.id).ToList();
 
                     //查询栏目推荐文章列表 
-                    ViewBag.RecommendNewsList = newsRepository.GetRecommendNewsList(entity.id, 10);
+                    IList<news> recommendNewsList = newsRepository.GetRecommendNewsList(entity.id, 5);
+                    news recommendFirst = recommendNewsList.FirstOrDefault();
+                    ViewBag.RecommendNewsFirst = recommendFirst;
+                    if (recommendFirst != null)
+                        ViewBag.RecommendNewsList = recommendNewsList.Where(w => w.id != recommendFirst.id).ToList();
                 }
 
                 return View();

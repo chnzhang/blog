@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SkyBlog.DbContexts.IRepository;
 using SkyBlog.Models.DbModel;
+using SkyBlog.Models.DTO;
 
 namespace SkyBlog.Areas.Blog.Controllers
 {
@@ -27,15 +28,7 @@ namespace SkyBlog.Areas.Blog.Controllers
         [HttpGet("{id}")]
         public IActionResult Details(int id)
         {
-            news entity = newsRepository.Get(id, userId);
-            if (entity != null)
-            {
-                user user = userRepository.Get(entity.user_id);
-                if (user != null)
-                    ViewBag.Auther = user.name;
-                else
-                    ViewBag.Auther ="未知";
-            }
+            NewsDetailDTO entity = newsRepository.GetNewsDetail(userId,id);           
 
             //查询文章标签
             ViewBag.NewsTagList=newsRepository.GetNewsTagList(id);
@@ -46,7 +39,7 @@ namespace SkyBlog.Areas.Blog.Controllers
             //更新点击率
             newsRepository.UpdateClickNumber(id);
 
-            return View(entity);
+            return View(userBlogTemplate+"News/Details.cshtml",entity);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace SkyBlog.Areas.Blog.Controllers
         public IActionResult Index()
         {
 
-            return View();
+            return View(userBlogTemplate+"About/Index.cshtml");
         }
     }
 }

@@ -121,7 +121,7 @@ namespace SkyBlog.DbContexts.Repository
                 news entity = db.news.Find(id);
                 entity.number += 1;
                 db.news.Update(entity);
-                db.SaveChangesAsync();
+                db.SaveChanges();
             }
         }
 

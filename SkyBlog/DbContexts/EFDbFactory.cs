@@ -12,7 +12,7 @@ namespace SkyBlog.DbContexts
         public static string ConnectionString { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL(ConnectionString);
+            optionsBuilder.UseMySql(ConnectionString);
         }
 
 

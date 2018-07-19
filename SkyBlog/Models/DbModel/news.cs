@@ -50,9 +50,9 @@ namespace SkyBlog.Models.DbModel
         public int user_id { get; set; }
 
         
-        public byte recommended{get;set;}
+        public sbyte recommended{get;set;}
 
-        public byte special_recommended{get;set;}
+        public sbyte special_recommended{get;set;}
 
         /// <summary>
         /// 最后修改时间

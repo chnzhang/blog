@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Caching.Redis;
+﻿
 using Newtonsoft.Json;
 using StackExchange.Redis;
 using System;
@@ -15,7 +15,7 @@ namespace SkyBlog.Common.Cache
 
         private static ConnectionMultiplexer _connection;
 
-        private static readonly string _instance;
+        private static readonly string _instance="";
 
         private static object _locker = new Object();
 
@@ -29,13 +29,8 @@ namespace SkyBlog.Common.Cache
                     {
                         if (_connection == null || !_connection.IsConnected)
                         {
-                            RedisCacheOptions options = new RedisCacheOptions
-                            {
-                                Configuration = Startup.Configuration["RedisConnectionStrings"],
-                                InstanceName = ""
-                            };
-
-                            _connection = ConnectionMultiplexer.Connect(options.Configuration);
+                           
+                            _connection = ConnectionMultiplexer.Connect(Startup.Configuration["RedisConnectionStrings"]);
                             if (_cache == null)
                             {
                                 _cache = _connection.GetDatabase();

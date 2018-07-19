@@ -200,7 +200,15 @@ namespace SkyBlog.DbContexts.Repository
             }
         }
 
-        public Pager GetNewsListPage(int pageSize, int page,int userId)
+        /// <summary>
+        /// 获取文章列表
+        /// </summary>
+        /// <param name="pageSize">每页大小</param>
+        /// <param name="page">当前页码</param>
+        /// <param name="userId">用户编号</param>
+        /// <param name="type">文章类型</param>
+        /// <returns></returns>
+        public Pager GetNewsListPage(int pageSize, int page,int userId,string type)
         {
             Pager pager=new Pager();
             pager.pageSize=pageSize;
@@ -212,8 +220,8 @@ namespace SkyBlog.DbContexts.Repository
                pager.total=count;
                 var query = from n in db.news
                             join u in db.user on n.user_id equals u.id
-                            join c in db.category on n.category_id equals c.id into temp
-                            from tt in temp.DefaultIfEmpty()
+                            join c in db.category on n.category_id equals c.id 
+                            where (string.IsNullOrEmpty(type)||c.code==type)                          
                             select new NewsListDTO
                             {
                                 id = n.id,
@@ -221,11 +229,12 @@ namespace SkyBlog.DbContexts.Repository
                                 description = n.description,
                                 image = n.image,
                                 userName = u.name,
-                                categoryName = tt.name,
+                                categoryName = c.name,
                                 number = n.number,
                                 goodNumber = n.good_number,
                                 createDateTime = n.create_date_time
                             };
+                
                 List<NewsListDTO> list = query.OrderByDescending(w=>w.id).Skip((page-1)*pageSize).Take(pageSize).ToList();
                 foreach (var item in list)
                 {

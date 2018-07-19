@@ -21,7 +21,7 @@ namespace SkyBlog
              .AddJsonFile("hosting.json", optional: true)
              .Build();
 
-            System.Threading.ThreadPool.SetMinThreads(500, 250);
+         //   System.Threading.ThreadPool.SetMinThreads(500, 250);
             BuildWebHost(config, args).Run();
         }
 

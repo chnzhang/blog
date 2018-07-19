@@ -18,7 +18,7 @@ namespace SkyBlog.Areas.Blog.Controllers
         
         public IActionResult Index(int page=1)
         {
-            Pager pager=newsRepository.GetNewsListPage(24,page,userId);
+            Pager pager=newsRepository.GetNewsListPage(24,page,userId,"");
 
             return View(userBlogTemplate+"TimeAxis/Index.cshtml",pager);
         }

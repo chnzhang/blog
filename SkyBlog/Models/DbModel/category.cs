@@ -14,14 +14,15 @@ namespace SkyBlog.Models.DbModel
     /// <summary>
     /// category Entity Model
     /// </summary>    
-    public class category: BaseEntity
+    public class category : BaseEntity
     {
-    
-	    
-     
-				/// <summary>
+
+
+        public string code { get; set; }
+
+        /// <summary>
         /// 
         /// </summary>
         public string name { get; set; }
-		    }
+    }
 }

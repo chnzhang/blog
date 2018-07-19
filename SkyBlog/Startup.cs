@@ -2,6 +2,7 @@
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NetDataAnnotations;
@@ -50,7 +51,7 @@ namespace SkyBlog
             {
                 //设置时间格式
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
-            });
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             #region 使用autofac代替原生IOC
             //ContainerBuilder builder = new ContainerBuilder();
@@ -71,8 +72,7 @@ namespace SkyBlog
 
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
+                app.UseDeveloperExceptionPage();              
             }
             else
             {
@@ -80,6 +80,7 @@ namespace SkyBlog
             }
 
             app.UseStaticFiles();
+            app.UseCookiePolicy();
 
             app.UseMvc(routes =>
             {
@@ -93,14 +94,14 @@ namespace SkyBlog
                 routes.MapRoute(
                     name: "default",
                     template: "{area=blog}/{controller=Home}/{action=Index}/{id?}"
-                    );             
+                    );
             });
 
             //Nlog配置
             env.ConfigureNLog("nlog.config");//读取Nlog配置文件 
 
             // 程序停止调用函数
-            appLifetime.ApplicationStopped.Register(() => { AutofacContainer.Dispose(); });
+            //appLifetime.ApplicationStopped.Register(() => { AutofacContainer.Dispose(); });
         }
     }
 }

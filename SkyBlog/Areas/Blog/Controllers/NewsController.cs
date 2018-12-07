@@ -24,7 +24,7 @@ namespace SkyBlog.Areas.Blog.Controllers
         /// </summary>
         /// <param name="type">文章类别</param>
         /// <returns></returns>
-        /*[HttpGet("list/{type}/{page}")]
+        [HttpGet("list/{type}/{page}")]
         public IActionResult Index(string type = "", int page = 1)
         {
             if (!string.IsNullOrEmpty(type) && type == "all")
@@ -32,7 +32,7 @@ namespace SkyBlog.Areas.Blog.Controllers
                 type = "";
             }
             return View(userBlogTemplate + "News/Index.cshtml", newsRepository.GetNewsListPage(20, page, userId, type));
-        }*/
+        }
 
         /// <summary>
         /// 查询文章详情
